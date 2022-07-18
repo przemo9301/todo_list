@@ -7,18 +7,39 @@ const createTask = (newBodyFromUI) => {
     taskDeadlineClass,
     taskCreationDataClass,
   } = newBodyFromUI;
+  console.log(typeof taskDeadlineClass);
 
   const newLi = document.createElement("li");
+  taskPriorityClass ? newLi.classList.add("checkedTrue") : null;
 
   const newText = document.createElement("text");
   newText.innerText = taskNameClass;
 
   const newDeadlineDate = document.createElement("deadline-date");
   newDeadlineDate.innerText =
-    taskDeadlineClass !== "Invalid Date" ? taskDeadlineClass : false;
+    taskDeadlineClass !== ""
+      ? new Date(taskDeadlineClass).toLocaleString()
+      : "No deadline";
+
+  const newInputCheckbox = document.createElement("input");
+  newInputCheckbox.setAttribute("type", "checkbox");
+  newInputCheckbox.classList.add("prioChecked");
+  newInputCheckbox.checked = false;
+  newInputCheckbox.style.width = "30px";
+  newInputCheckbox.style.height = "30px";
+
+  const newInputCheckboxChecked = document.createElement("input");
+  newInputCheckboxChecked.setAttribute("type", "checkbox");
+  newInputCheckboxChecked.checked = true;
+  newInputCheckboxChecked.classList.add("activeCheck", "prioChecked");
+  newInputCheckboxChecked.style.width = "30px";
+  newInputCheckboxChecked.style.height = "30px";
+  newInputCheckboxChecked.style.backgroundColor = "rgba(0, 0, 255, 0.5)";
 
   const newPriority = document.createElement("prio");
-  newPriority.innerText = taskPriorityClass;
+  taskPriorityClass
+    ? newPriority.appendChild(newInputCheckboxChecked)
+    : newPriority.appendChild(newInputCheckbox);
 
   const newDate = document.createElement("create-date");
   newDate.innerText = taskCreationDataClass;
@@ -31,23 +52,19 @@ const createTask = (newBodyFromUI) => {
   doneCheckbox.classList.add("checkDone");
 
   const newButtonDelete = document.createElement("button");
-  newButtonDelete.classList.add("btn-delete");
+  newButtonDelete.classList.add("btnDelete");
   newButtonDelete.dataset.id = taskIdClass;
   newButtonDelete.dataset.priority = taskPriorityClass;
   newButtonDelete.innerText = "Delete";
-  newButtonDelete.addEventListener("click", () => {
-    console.log("Delete");
-  });
+  newButtonDelete.addEventListener("click", removeTaskFromList);
 
   const newButtonEdit = document.createElement("button");
-  newButtonEdit.classList.add("btn-edit");
+  newButtonEdit.classList.add("btnEdit");
   newButtonEdit.dataset.id = taskIdClass;
   newButtonEdit.dataset.priority = taskPriorityClass;
   newButtonEdit.innerText = "Edit";
-  newButtonEdit.addEventListener("click", () => {
-    console.log("Edit");
-  });
-
+  newButtonEdit.addEventListener("click", editTaskFromList);
+  // Future idea
   // const newButtonUp = document.createElement("button");
   // newButtonUp.classList.add("btn-up");
   // newButtonUp.dataset.id = id;
@@ -95,5 +112,4 @@ const sendDataToServer = async (sendInfoByBody) => {
   };
   const sendData = await fetch("http://localhost:3100/send/", options);
   const data = await sendData.json();
-  console.log(data);
 };

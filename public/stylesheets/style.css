@@ -54,6 +54,7 @@ header {
     /*background: blue;*/
     font-size: 25px;
     font-weight: bold;
+    animation: switchOnH1 3000ms linear 1 alternate
 }
 
 
@@ -79,6 +80,7 @@ ul {
     background-image: url("../images/body_app.jpg");
     background-size: cover;
     background-position: center;
+
 }
 
 li, .divLi {
@@ -200,4 +202,12 @@ input:hover {
     to {
         opacity: 1;
     }
+}
+
+.checkedTrue {
+    background-color: rgba(0, 0, 255, 0.5);
+}
+
+.checkedFalse {
+    background-color: rgba(245, 148, 39, 0.5);
 }
