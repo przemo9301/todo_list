@@ -41,7 +41,7 @@ header {
     background-color: rgba(0, 0, 0, 0.6);
     font-family: 'open sans', sans-serif;
     padding: 20px 60px;
-    animation: switchOnH1 3000ms linear 1 alternate;
+    animation: switchOnH1 2000ms linear 1 alternate;
 
 }
 
@@ -54,7 +54,7 @@ header {
     /*background: blue;*/
     font-size: 25px;
     font-weight: bold;
-    animation: switchOnH1 3000ms linear 1 alternate
+    animation: switchOnH1 2000ms linear 1 alternate
 }
 
 
@@ -96,6 +96,7 @@ li, .divLi {
 .divLi {
     flex-basis: 40px;
     background: grey;
+    font-size: 20px;
 }
 
 
@@ -205,11 +206,16 @@ input:hover {
 }
 
 .checkedTrue {
-    background-color: rgba(0, 0, 255, 0.5);
+    background-color: rgba(0, 0, 255, 0.45);
 }
 
 .checkedFalse {
     background-color: rgba(245, 148, 39, 0.5);
+}
+
+
+.redMeetDeadline {
+    background-color: rgba(255, 0, 0, 0.5);
 }
 
 .greenDone {

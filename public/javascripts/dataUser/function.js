@@ -7,6 +7,7 @@ const createTask = (newBodyFromUI) => {
     taskDeadlineClass,
     taskCreationDataClass,
     taskDoneClass,
+    taskMeetDeadline,
   } = newBodyFromUI;
   console.log(typeof taskDeadlineClass);
 
@@ -24,6 +25,10 @@ const createTask = (newBodyFromUI) => {
     taskDeadlineClass !== ""
       ? new Date(taskDeadlineClass).toLocaleString()
       : "No deadline";
+
+  if (taskMeetDeadline) {
+    newLi.classList.add("redMeetDeadline");
+  }
 
   const newInputCheckbox = document.createElement("input");
   newInputCheckbox.setAttribute("type", "checkbox");
@@ -121,4 +126,19 @@ const sendDataToServer = async (sendInfoByBody) => {
   };
   const sendData = await fetch("http://localhost:3100/send/", options);
   const data = await sendData.json();
+  console.log(data);
+  ulList.classList.add(data.answer);
+};
+const getDataFromServer = async () => {
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    cache: "no-cache",
+  };
+  const sendData = await fetch("http://localhost:3100/get/", options);
+  const data = await sendData.json();
+  console.log(data);
+  return data;
 };

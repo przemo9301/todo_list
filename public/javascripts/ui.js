@@ -5,12 +5,30 @@ const taskPriority = document.querySelector("#taskPriority");
 const taskDeadline = document.querySelector("#taskDeadline");
 const listPriorityChecked = document.querySelector(".prioChcked");
 
-let counter = 0;
 let flag = true;
 
 const createTaskList = new TaskList();
 
-const taskIsDone = (e) => {
+const clearValuesInFrom = () => {
+  taskDeadline.value = new Date().toISOString();
+  taskPriority.checked = false;
+  taskText.value = "";
+};
+
+(async () => {
+  console.log("Powinno się sciągnac cos");
+  const dataFromServer = JSON.parse(await getDataFromServer());
+
+  if (dataFromServer === "" || dataFromServer.length === 0) {
+    console.log("Retrun null");
+    return null;
+  }
+  console.log("Przesżło przz if ");
+  createTaskList.addArray(dataFromServer);
+  createNewTasksList();
+})();
+
+const taskIsDone = async (e) => {
   const id = Number(e.target.dataset.id);
   console.log("taskis done", id);
   const getObjetFromArray = createTaskList.getTaskFromArray(id);
@@ -20,12 +38,7 @@ const taskIsDone = (e) => {
     : false;
   createTaskList.sendTaskToArray(id, getObjetFromArray);
   createNewTasksList();
-};
-
-const clearValuesInFrom = () => {
-  taskDeadline.value = new Date().toISOString();
-  taskPriority.checked = false;
-  taskText.value = "";
+  await sendDataToServer(createTaskList.showList());
 };
 
 const editTaskFromList = (e) => {
@@ -43,11 +56,12 @@ const editTaskFromList = (e) => {
   flag = false;
 };
 
-const removeTaskFromList = (e) => {
+const removeTaskFromList = async (e) => {
   const id = Number(e.target.dataset.id);
   console.log({ id });
   createTaskList.removeTaskFromArray(id);
   createNewTasksList();
+  await sendDataToServer(createTaskList.showList());
 };
 
 const createNewTasksList = () => {
@@ -59,26 +73,23 @@ const createNewTasksList = () => {
 
 const addTaskToList = async (e) => {
   e.preventDefault();
-  counter++;
-  console.log("działa");
   const taskTextValue = taskText.value;
   const taskCreationDateValue = new Date().toLocaleString();
   const taskPriorityValue = taskPriority.checked;
   const taskDeadlineValue = taskDeadline.value;
   const newBodyFetch = new TaskToDo(
-    counter,
+    createTaskList.getNewCounter(),
     flag ? taskTextValue : taskTextValue + "-Edited",
     taskPriorityValue,
     taskDeadlineValue,
     taskCreationDateValue,
+    false,
     false
   );
   createTaskList.addTaskToArray(newBodyFetch);
-  console.log(createTaskList.showList());
-  // createTask(newBodyFetch);
   createNewTasksList();
-  await sendDataToServer(newBodyFetch);
   clearValuesInFrom();
+  await sendDataToServer(createTaskList.showList());
 };
 
 addBtn.addEventListener("click", async (e) => {
@@ -87,12 +98,7 @@ addBtn.addEventListener("click", async (e) => {
   } else if (addBtn.innerHTML === "Approve changes") {
     addBtn.innerHTML = "Add to list";
     console.log("działa wenwątrz apofove ");
-    await addTaskToList(e);
     flag = true;
+    await addTaskToList(e);
   }
 });
-
-// listPriorityChecked.addEventListener("change", () => {
-//   listPriorityChecked.classList.toggle("activeCheck");
-//   console.log("dziła inpu active checked ");
-// });

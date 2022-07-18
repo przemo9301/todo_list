@@ -37,4 +37,18 @@ class TaskList {
   showList() {
     return this.tasks;
   }
+
+  addArray(arrayFromServer) {
+    this.tasks = arrayFromServer;
+  }
+
+  getNewCounter() {
+    const arrayLength = this.tasks.length;
+    if (arrayLength === 0) return 1;
+    let counter = this.tasks[arrayLength - 1].taskIdClass;
+    counter++;
+    console.log(arrayLength);
+    console.log(counter);
+    return counter;
+  }
 }
