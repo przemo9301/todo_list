@@ -24,6 +24,16 @@ class TaskList {
     }
   }
 
+  sendTaskToArray(no, object) {
+    for (let i = 0; i < this.tasks.length; i++) {
+      if (this.tasks[i].taskIdClass === no) {
+        this.tasks[i] = object;
+        console.log({ i, no });
+        console.log(object);
+      }
+    }
+  }
+
   showList() {
     return this.tasks;
   }

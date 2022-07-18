@@ -6,11 +6,15 @@ const createTask = (newBodyFromUI) => {
     taskPriorityClass,
     taskDeadlineClass,
     taskCreationDataClass,
+    taskDoneClass,
   } = newBodyFromUI;
   console.log(typeof taskDeadlineClass);
 
   const newLi = document.createElement("li");
   taskPriorityClass ? newLi.classList.add("checkedTrue") : null;
+  taskDoneClass
+    ? newLi.classList.add("greenDone")
+    : newLi.classList.remove("greenDone");
 
   const newText = document.createElement("text");
   newText.innerText = taskNameClass;
@@ -25,12 +29,14 @@ const createTask = (newBodyFromUI) => {
   newInputCheckbox.setAttribute("type", "checkbox");
   newInputCheckbox.classList.add("prioChecked");
   newInputCheckbox.checked = false;
+  newInputCheckbox.disabled = true;
   newInputCheckbox.style.width = "30px";
   newInputCheckbox.style.height = "30px";
 
   const newInputCheckboxChecked = document.createElement("input");
   newInputCheckboxChecked.setAttribute("type", "checkbox");
   newInputCheckboxChecked.checked = true;
+  newInputCheckboxChecked.disabled = true;
   newInputCheckboxChecked.classList.add("activeCheck", "prioChecked");
   newInputCheckboxChecked.style.width = "30px";
   newInputCheckboxChecked.style.height = "30px";
@@ -49,7 +55,10 @@ const createTask = (newBodyFromUI) => {
 
   const doneCheckbox = document.createElement("input");
   doneCheckbox.setAttribute("type", "checkbox");
+  doneCheckbox.dataset.id = taskIdClass;
   doneCheckbox.classList.add("checkDone");
+  doneCheckbox.addEventListener("change", taskIsDone);
+  doneCheckbox.checked = taskDoneClass;
 
   const newButtonDelete = document.createElement("button");
   newButtonDelete.classList.add("btnDelete");

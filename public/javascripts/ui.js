@@ -6,8 +6,21 @@ const taskDeadline = document.querySelector("#taskDeadline");
 const listPriorityChecked = document.querySelector(".prioChcked");
 
 let counter = 0;
+let flag = true;
 
 const createTaskList = new TaskList();
+
+const taskIsDone = (e) => {
+  const id = Number(e.target.dataset.id);
+  console.log("taskis done", id);
+  const getObjetFromArray = createTaskList.getTaskFromArray(id);
+  console.log(getObjetFromArray);
+  getObjetFromArray.taskDoneClass = !getObjetFromArray.taskDoneClass
+    ? true
+    : false;
+  createTaskList.sendTaskToArray(id, getObjetFromArray);
+  createNewTasksList();
+};
 
 const clearValuesInFrom = () => {
   taskDeadline.value = new Date().toISOString();
@@ -27,10 +40,7 @@ const editTaskFromList = (e) => {
   taskText.value = taskNameClass;
   addBtn.innerHTML = "Approve changes";
   createTaskList.removeTaskFromArray(id);
-  // removeTaskFromList(e);
-  // createTaskList.removeTaskFromArray(id);
-  // createNewTasksList();
-  // createTaskList.sendEditedObjectToArray(id, getObjetFromArray);
+  flag = false;
 };
 
 const removeTaskFromList = (e) => {
@@ -57,10 +67,11 @@ const addTaskToList = async (e) => {
   const taskDeadlineValue = taskDeadline.value;
   const newBodyFetch = new TaskToDo(
     counter,
-    taskTextValue,
+    flag ? taskTextValue : taskTextValue + "-Edited",
     taskPriorityValue,
     taskDeadlineValue,
-    taskCreationDateValue
+    taskCreationDateValue,
+    false
   );
   createTaskList.addTaskToArray(newBodyFetch);
   console.log(createTaskList.showList());
@@ -77,10 +88,11 @@ addBtn.addEventListener("click", async (e) => {
     addBtn.innerHTML = "Add to list";
     console.log("działa wenwątrz apofove ");
     await addTaskToList(e);
+    flag = true;
   }
 });
 
-listPriorityChecked.addEventListener("change", () => {
-  listPriorityChecked.classList.toggle("activeCheck");
-  console.log("dziła inpu active checked ");
-});
+// listPriorityChecked.addEventListener("change", () => {
+//   listPriorityChecked.classList.toggle("activeCheck");
+//   console.log("dziła inpu active checked ");
+// });

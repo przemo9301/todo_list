@@ -99,7 +99,7 @@ li, .divLi {
 }
 
 
-text, .checkDone, deadline-date, create-date, prio, .buttonDiv {
+text, .checkDone, deadline-date, create-date, prio, .buttonDiv, .checkDoneDiv {
     text-align: center;
 }
 
@@ -123,7 +123,7 @@ prio {
     flex-basis: 10%;
 }
 
-.checkDone{
+.checkDone, .checkDoneDiv {
     flex-basis: 5%;
 }
 
@@ -210,4 +210,8 @@ input:hover {
 
 .checkedFalse {
     background-color: rgba(245, 148, 39, 0.5);
+}
+
+.greenDone {
+    background-color: rgba(0, 255, 0, 0.5);
 }
