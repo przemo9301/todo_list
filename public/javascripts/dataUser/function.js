@@ -23,6 +23,13 @@ const createTask = (newBodyFromUI) => {
   const newDate = document.createElement("create-date");
   newDate.innerText = taskCreationDataClass;
 
+  const createNewDiv = document.createElement("div");
+  createNewDiv.classList.add("buttonDiv");
+
+  const doneCheckbox = document.createElement("input");
+  doneCheckbox.setAttribute("type", "checkbox");
+  doneCheckbox.classList.add("checkDone");
+
   const newButtonDelete = document.createElement("button");
   newButtonDelete.classList.add("btn-delete");
   newButtonDelete.dataset.id = taskIdClass;
@@ -67,8 +74,10 @@ const createTask = (newBodyFromUI) => {
   newLi.appendChild(newDate);
   newLi.appendChild(newPriority);
   newLi.appendChild(newBr);
-  newLi.appendChild(newButtonEdit);
-  newLi.appendChild(newButtonDelete);
+  createNewDiv.appendChild(newButtonEdit);
+  createNewDiv.appendChild(newButtonDelete);
+  newLi.appendChild(createNewDiv);
+  newLi.appendChild(doneCheckbox);
   // newLi.appendChild(newButtonUp);
   // newLi.appendChild(newButtonDown);
 

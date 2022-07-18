@@ -6,33 +6,35 @@
 </head>
 
 <body>
-<header>
-    <h1 id="slogan">Your own TO-DO list.
-    </h1>
-</header>
+<section class="sectionHeader">
+    <header>
+
+        <h1 id="slogan">Your own TO-DO list.
+        </h1>
+    </header>
 
 
-<div class="formDiv" >
-    <div class="textWindow">
-        <label class="textWindowLabel" for="taskToDoText">Write task to do</label><br>
-        <textarea id="taskToDoText" name="taskToDoText"
-                  rows="3" cols="33"></textarea>
-<!--        <input type="text" id="taskToDoText" name="taskToDoText">-->
+    <div class="formDiv">
+        <div class="textWindow">
+            <label class="textWindowLabel" for="taskToDoText">Write task to do</label><br>
+            <textarea id="taskToDoText" name="taskToDoText"
+                      rows="3" cols="33"></textarea>
+            <!--        <input type="text" id="taskToDoText" name="taskToDoText">-->
+        </div>
+        <div class="priorityWindow">
+            <input type="checkbox" id="taskPriority" name="taskPriority">
+            <label for="taskPriority">Priority</label>
+        </div>
+        <div class="deadlineWindow">
+            <label for="taskDeadline">Deadline</label><br>
+            <input type="datetime-local" id="taskDeadline" name="taskDeadline">
+        </div>
+        <div class="buttonWindow">
+            <button type="submit" class="addBtn">Add to list</button>
+        </div>
     </div>
-    <div class="priorityWindow">
-        <input type="checkbox" id="taskPriority" name="taskPriority">
-        <label for="taskPriority">Priority</label>
-    </div>
-    <div class="deadlineWindow">
-        <label for="taskDeadline">Deadline</label><br>
-        <input type="datetime-local" id="taskDeadline" name="taskDeadline">
-    </div>
-    <div class="buttonWindow">
-        <button type="submit" class="addBtn">Add to list</button>
-    </div>
-</div>
 
-
+</section>
 <ul class="tasksList">
     <div class="divLi">
         <text>Task content</text>
@@ -46,7 +48,7 @@
         <text> sadasdsadsa</text>
         <deadline-date>817230219-2103 deadline</deadline-date>
         <create-date>817230219-2103 create</create-date>
-        <prio> true </prio>
+        <prio> true</prio>
         <div class="buttonDiv">
             <button>Edit</button>
             <button>Delete</button>
@@ -57,7 +59,7 @@
         <text> sadasdsadsa</text>
         <deadline-date>817230219-2103 deadline</deadline-date>
         <create-date>817230219-2103 create</create-date>
-        <prio> true </prio>
+        <prio> true</prio>
         <div class="buttonDiv">
             <button>Edit</button>
             <button>Delete</button>
@@ -68,162 +70,18 @@
         <text> sadasdsadsa</text>
         <deadline-date>817230219-2103 deadline</deadline-date>
         <create-date>817230219-2103 create</create-date>
-        <prio> true </prio>
+        <prio> true</prio>
         <div class="buttonDiv">
             <button>Edit</button>
             <button>Delete</button>
         </div>
         <input class="checkDone" type="checkbox">
     </li>
-    <li>
-        <text> sadasdsadsa</text>
-        <deadline-date>817230219-2103 deadline</deadline-date>
-        <create-date>817230219-2103 create</create-date>
-        <prio> true </prio>
-        <div class="buttonDiv">
-            <button>Edit</button>
-            <button>Delete</button>
-        </div>
-        <input class="checkDone" type="checkbox">
-    </li>
-    <li>
-        <text> sadasdsadsa</text>
-        <deadline-date>817230219-2103 deadline</deadline-date>
-        <create-date>817230219-2103 create</create-date>
-        <prio> true </prio>
-        <div class="buttonDiv">
-            <button>Edit</button>
-            <button>Delete</button>
-        </div>
-        <input class="checkDone" type="checkbox">
-    </li>
-    <li>
-        <text> sadasdsadsa</text>
-        <deadline-date>817230219-2103 deadline</deadline-date>
-        <create-date>817230219-2103 create</create-date>
-        <prio> true </prio>
-        <div class="buttonDiv">
-            <button>Edit</button>
-            <button>Delete</button>
-        </div>
-        <input class="checkDone" type="checkbox">
-    </li>
-    <li>
-        <text> sadasdsadsa</text>
-        <deadline-date>817230219-2103 deadline</deadline-date>
-        <create-date>817230219-2103 create</create-date>
-        <prio> true </prio>
-        <div class="buttonDiv">
-            <button>Edit</button>
-            <button>Delete</button>
-        </div>
-        <input class="checkDone" type="checkbox">
-    </li>
-    <li>
-        <text> sadasdsadsa</text>
-        <deadline-date>817230219-2103 deadline</deadline-date>
-        <create-date>817230219-2103 create</create-date>
-        <prio> true </prio>
-        <div class="buttonDiv">
-            <button>Edit</button>
-            <button>Delete</button>
-        </div>
-        <input class="checkDone" type="checkbox">
-    </li>
-    <li>
-        <text> sadasdsadsa</text>
-        <deadline-date>817230219-2103 deadline</deadline-date>
-        <create-date>817230219-2103 create</create-date>
-        <prio> true </prio>
-        <div class="buttonDiv">
-            <button>Edit</button>
-            <button>Delete</button>
-        </div>
-        <input class="checkDone" type="checkbox">
-    </li>
-    <li>
-        <text> sadasdsadsa</text>
-        <deadline-date>817230219-2103 deadline</deadline-date>
-        <create-date>817230219-2103 create</create-date>
-        <prio> true </prio>
-        <div class="buttonDiv">
-            <button>Edit</button>
-            <button>Delete</button>
-        </div>
-        <input class="checkDone" type="checkbox">
-    </li>
-    <li>
-        <text> sadasdsadsa</text>
-        <deadline-date>817230219-2103 deadline</deadline-date>
-        <create-date>817230219-2103 create</create-date>
-        <prio> true </prio>
-        <div class="buttonDiv">
-            <button>Edit</button>
-            <button>Delete</button>
-        </div>
-        <input class="checkDone" type="checkbox">
-    </li>
-    <li>
-        <text> sadasdsadsa</text>
-        <deadline-date>817230219-2103 deadline</deadline-date>
-        <create-date>817230219-2103 create</create-date>
-        <prio> true </prio>
-        <div class="buttonDiv">
-            <button>Edit</button>
-            <button>Delete</button>
-        </div>
-        <input class="checkDone" type="checkbox">
-    </li>
-    <li>
-        <text> sadasdsadsa</text>
-        <deadline-date>817230219-2103 deadline</deadline-date>
-        <create-date>817230219-2103 create</create-date>
-        <prio> true </prio>
-        <div class="buttonDiv">
-            <button>Edit</button>
-            <button>Delete</button>
-        </div>
-        <input class="checkDone" type="checkbox">
-    </li>
-    <li>
-        <text> sadasdsadsa</text>
-        <deadline-date>817230219-2103 deadline</deadline-date>
-        <create-date>817230219-2103 create</create-date>
-        <prio> true </prio>
-        <div class="buttonDiv">
-            <button>Edit</button>
-            <button>Delete</button>
-        </div>
-        <input class="checkDone" type="checkbox">
-    </li>
-    <li>
-        <text> sadasdsadsa</text>
-        <deadline-date>817230219-2103 deadline</deadline-date>
-        <create-date>817230219-2103 create</create-date>
-        <prio> true </prio>
-        <div class="buttonDiv">
-            <button>Edit</button>
-            <button>Delete</button>
-        </div>
-        <input class="checkDone" type="checkbox">
-    </li>
-    <li>
-        <text> sadasdsadsa</text>
-        <deadline-date>817230219-2103 deadline</deadline-date>
-        <create-date>817230219-2103 create</create-date>
-        <prio> true </prio>
-        <div class="buttonDiv">
-            <button>Edit</button>
-            <button>Delete</button>
-        </div>
-        <input class="checkDone" type="checkbox">
-    </li>
-
-
+ 
 
 </ul>
 
-<footer>Strona została wykonan w celach dydaktycznych przez Przemysław Łukowiak </footer>
+<footer>Strona została wykonan w celach dydaktycznych przez Przemysław Łukowiak</footer>
 <script src="javascripts/class/Task.js"></script>
 <script src="javascripts/dataUser/function.js"></script>
 <script src="javascripts/ui.js"></script>
