@@ -7,30 +7,33 @@ const taskPriority = document.querySelector("#taskPriority");
 const taskDeadline = document.querySelector("#taskDeadline");
 const ulList = document.querySelector(".tasksList");
 
-let flag = true;
+let flagAddBtn = true;
+let flagDoneBtn = true;
 
 const createTaskList = new TaskList();
-(async () => {
-  const dataFromServer = JSON.parse(await getDataFromServer());
-  if (dataFromServer === "" || dataFromServer.length === 0) return null;
-  createTaskList.addArray(dataFromServer);
-  await deadlineRed();
-  createNewTasksList();
-})();
 
 const doneAllTasks = async () => {
   const arr = createTaskList.showListFromArray();
-  for (let i = 0; i < arr.length; i++) {
-    arr[i].taskDoneClass = !arr[i].taskDoneClass;
+  if (flagDoneBtn) {
+    flagDoneBtn = !flagDoneBtn;
+    for (let i = 0; i < arr.length; i++) {
+      arr[i].taskDoneClass = true;
+    }
+    doneAllBtn.innerText = "All not done";
+  } else {
+    flagDoneBtn = !flagDoneBtn;
+    for (let i = 0; i < arr.length; i++) {
+      arr[i].taskDoneClass = false;
+    }
+    doneAllBtn.innerText = "All done";
   }
-  console.log(arr);
   createNewTasksList();
   await sendDataToServer(arr);
 };
 
 const deleteAllTasks = async () => {
   const data = createTaskList.deleteAllTasksInApp();
-  deactivateButton(true);
+  deactivateButton(true, "add");
   createNewTasksList();
   console.log(data);
   await sendDataToServer(data);
@@ -57,8 +60,8 @@ const editTaskFromList = (e) => {
   addBtn.innerHTML = "Approve changes";
   ulList.classList.add("noHover");
   createTaskList.removeTaskFromArray(id);
-  deactivateButton(false);
-  flag = false;
+  deactivateButton(false, "add");
+  flagAddBtn = false;
 };
 
 const removeTaskFromList = async (e) => {
@@ -96,14 +99,25 @@ const addTaskToList = async (e) => {
 addBtn.addEventListener("click", async (e) => {
   if (addBtn.innerHTML === "Add to list") {
     await addTaskToList(e);
-    deactivateButton(false);
+    deactivateButton(false, "remove");
   } else if (addBtn.innerHTML === "Approve changes") {
     addBtn.innerHTML = "Add to list";
     ulList.classList.remove("noHover");
-    flag = true;
-    deactivateButton(false);
+    flagAddBtn = true;
+    deactivateButton(false, "remove");
     await addTaskToList(e);
   }
 });
 deleteAllBtn.addEventListener("click", deleteAllTasks);
 doneAllBtn.addEventListener("click", doneAllTasks);
+
+(async () => {
+  const dataFromServer = JSON.parse(await getDataFromServer());
+  dataFromServer.length
+    ? deactivateButton(false, "remove")
+    : deactivateButton(true, "add");
+  if (dataFromServer === "" || dataFromServer.length === 0) return null;
+  createTaskList.addArray(dataFromServer);
+  await deadlineRed();
+  createNewTasksList();
+})();

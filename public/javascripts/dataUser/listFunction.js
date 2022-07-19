@@ -108,9 +108,17 @@ const createNewTasksList = () => {
   }
 };
 
-const deactivateButton = (data) => {
+const deactivateButton = (data, num) => {
   deleteAllBtn.disabled = data;
-  deleteAllBtn.classList.toggle("noHover");
   doneAllBtn.disabled = data;
-  doneAllBtn.classList.toggle("noHover");
+  switch (num) {
+    case "add":
+      doneAllBtn.classList.add("noHover");
+      deleteAllBtn.classList.add("noHover");
+      break;
+    case "remove":
+      doneAllBtn.classList.remove("noHover");
+      deleteAllBtn.classList.remove("noHover");
+      break;
+  }
 };
