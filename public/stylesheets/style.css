@@ -19,7 +19,7 @@ body {
 }
 
 
-.sectionHeader {
+.sectionHeader, img {
     background-image: url("../images/main.jpg");
     background-size: cover;
     background-position: center;

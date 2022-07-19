@@ -78,8 +78,11 @@ const addTaskToList = async (e) => {
   const taskCreationDateValue = new Date().toLocaleString();
   const taskPriorityValue = taskPriority.checked;
   const taskDeadlineValue = taskDeadline.value;
-  // if (taskTextValue.length < 5)
-  //   return alert("Added task is shorter than 5 characters");
+  if (taskTextValue.length < 5)
+    return alert("Added task is shorter than 5 characters");
+  if (new Date() > new Date(taskDeadlineValue)) {
+    return alert("Deadline has already passed ");
+  }
   const newBodyFetch = new TaskToDo(
     createTaskList.getNewCounterForArray(),
     taskTextValue,

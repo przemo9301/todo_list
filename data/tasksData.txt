@@ -1,1 +1,1 @@
-[{"taskIdClass":1,"taskNameClass":"","taskPriorityClass":false,"taskDeadlineClass":"","taskCreationDataClass":"20.07.2022, 01:26:39","taskDoneClass":false,"taskMeetDeadline":false},{"taskIdClass":2,"taskNameClass":"sad","taskPriorityClass":false,"taskDeadlineClass":"2022-07-20T01:27","taskCreationDataClass":"20.07.2022, 01:26:58","taskDoneClass":false,"taskMeetDeadline":true}]
+[]
