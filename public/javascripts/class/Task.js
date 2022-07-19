@@ -18,7 +18,6 @@ class TaskList {
   getTaskFromArray(no) {
     for (let i = 0; i < this.tasks.length; i++) {
       if (this.tasks[i].taskIdClass === no) {
-        console.log({ i });
         return this.tasks[i];
       }
     }
@@ -28,13 +27,11 @@ class TaskList {
     for (let i = 0; i < this.tasks.length; i++) {
       if (this.tasks[i].taskIdClass === no) {
         this.tasks[i] = object;
-        console.log({ i, no });
-        console.log(object);
       }
     }
   }
 
-  showList() {
+  showListFromArray() {
     return this.tasks;
   }
 
@@ -42,11 +39,16 @@ class TaskList {
     this.tasks = arrayFromServer;
   }
 
-  getNewCounter() {
+  getNewCounterForArray() {
     const arrayLength = this.tasks.length;
     if (arrayLength === 0) return 1;
     let counter = this.tasks[arrayLength - 1].taskIdClass;
     counter++;
     return counter;
+  }
+
+  deleteAllTasksInApp() {
+    this.tasks.length = 0;
+    return this.tasks;
   }
 }

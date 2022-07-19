@@ -51,7 +51,7 @@ header {
     align-items: center;
     flex-direction: row;
     width: 100%;
-    /*background: blue;*/
+    height: 180px;
     font-size: 25px;
     font-weight: bold;
     animation: switchOnH1 2000ms linear 1 alternate
@@ -63,10 +63,15 @@ header {
     display: block;
 }
 
-.addBtn {
-    padding: 5px 10px;
+.addBtn, .deleteAllBtn {
+    margin-bottom: 10px;
+}
+
+.addBtn, .deleteAllBtn, .doneAllBtn {
+    padding: 5px 5px;
     width: 160px;
-    font-size: 25px;
+    font-size: 20px;
+    display: block;
 }
 
 ul {
@@ -220,4 +225,8 @@ input:hover {
 
 .greenDone {
     background-color: rgba(0, 255, 0, 0.5);
+}
+
+.noHover {
+    pointer-events: none;
 }

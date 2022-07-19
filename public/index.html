@@ -1,25 +1,20 @@
 <html>
-
 <head>
-    <title>Express</title>
+    <title>ToDo-app</title>
     <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 <body>
 <section class="sectionHeader">
     <header>
-
         <h1 id="slogan">Organize your time better.
         </h1>
     </header>
-
-
     <div class="formDiv">
         <div class="textWindow">
             <label class="textWindowLabel" for="taskToDoText">Write task to do</label><br>
             <textarea id="taskToDoText" name="taskToDoText"
                       rows="3" cols="33"></textarea>
-            <!--        <input type="text" id="taskToDoText" name="taskToDoText">-->
         </div>
         <div class="priorityWindow">
             <input type="checkbox" id="taskPriority" name="taskPriority">
@@ -31,9 +26,10 @@
         </div>
         <div class="buttonWindow">
             <button type="submit" class="addBtn">Add to list</button>
+            <button type="submit" class="deleteAllBtn">Delete all</button>
+            <button type="submit" class="doneAllBtn">Done all</button>
         </div>
     </div>
-
 </section>
 <div class="divLi">
     <text>Task content</text>
@@ -44,17 +40,14 @@
     <div class="checkDoneDiv">Done</div>
 </div>
 <ul class="tasksList">
-
-
 </ul>
-
 <footer>Strona została wykonan w celach dydaktycznych przez Przemysław Łukowiak</footer>
+
 <script src="javascripts/class/TaskToDo.js"></script>
 <script src="javascripts/class/Task.js"></script>
-<script src="javascripts/dataUser/function.js"></script>
+<script src="javascripts/dataUser/asyncFunction.js"></script>
+<script src="javascripts/dataUser/listFunction.js"></script>
 <script src="javascripts/ui.js"></script>
 
 </body>
-
 </html>
-<!--    <textarea id="w3review" name="w3review" ></textarea>-->

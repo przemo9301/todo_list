@@ -1,4 +1,3 @@
-const ulList = document.querySelector(".tasksList");
 const createTask = (newBodyFromUI) => {
   const {
     taskIdClass,
@@ -9,7 +8,6 @@ const createTask = (newBodyFromUI) => {
     taskDoneClass,
     taskMeetDeadline,
   } = newBodyFromUI;
-  console.log(typeof taskDeadlineClass);
 
   const newLi = document.createElement("li");
   taskPriorityClass ? newLi.classList.add("checkedTrue") : null;
@@ -57,49 +55,34 @@ const createTask = (newBodyFromUI) => {
 
   const createNewDiv = document.createElement("div");
   createNewDiv.classList.add("buttonDiv");
-
+  //Checkbox
   const doneCheckbox = document.createElement("input");
   doneCheckbox.setAttribute("type", "checkbox");
   doneCheckbox.dataset.id = taskIdClass;
   doneCheckbox.classList.add("checkDone");
   doneCheckbox.addEventListener("change", taskIsDone);
   doneCheckbox.checked = taskDoneClass;
-
+  //Button Delete
   const newButtonDelete = document.createElement("button");
   newButtonDelete.classList.add("btnDelete");
   newButtonDelete.dataset.id = taskIdClass;
   newButtonDelete.dataset.priority = taskPriorityClass;
   newButtonDelete.innerText = "Delete";
   newButtonDelete.addEventListener("click", removeTaskFromList);
-
+  // Button edit
   const newButtonEdit = document.createElement("button");
   newButtonEdit.classList.add("btnEdit");
   newButtonEdit.dataset.id = taskIdClass;
   newButtonEdit.dataset.priority = taskPriorityClass;
   newButtonEdit.innerText = "Edit";
+  newButtonEdit.disabled = taskDoneClass;
+  taskDoneClass
+    ? newButtonEdit.classList.add("noHover")
+    : newButtonEdit.classList.remove("noHover");
   newButtonEdit.addEventListener("click", editTaskFromList);
-  // Future idea
-  // const newButtonUp = document.createElement("button");
-  // newButtonUp.classList.add("btn-up");
-  // newButtonUp.dataset.id = id;
-  // newButtonUp.dataset.priority = priority;
-  // newButtonUp.innerText = "Up";
-  // newButtonUp.addEventListener("click", () => {
-  //   console.log("Up");
-  // });
 
-  // const newButtonDown = document.createElement("button");
-  // newButtonDown.classList.add("btn-down");
-  // newButtonDown.dataset.id = id;
-  // newButtonDown.dataset.priority = priority;
-  // newButtonDown.innerText = "Down";
-  // newButtonDown.addEventListener("click", () => {
-  //   console.log("Down");
-  // });
-
-  //I do <br>
   const newBr = document.createElement("br");
-
+  //Create li
   newLi.appendChild(newText);
   newLi.appendChild(newDeadlineDate);
   newLi.appendChild(newDate);
@@ -109,36 +92,25 @@ const createTask = (newBodyFromUI) => {
   createNewDiv.appendChild(newButtonDelete);
   newLi.appendChild(createNewDiv);
   newLi.appendChild(doneCheckbox);
-  // newLi.appendChild(newButtonUp);
-  // newLi.appendChild(newButtonDown);
 
   ulList.appendChild(newLi);
 };
-
-const sendDataToServer = async (sendInfoByBody) => {
-  const options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    cache: "no-cache",
-    body: JSON.stringify(sendInfoByBody),
-  };
-  const sendData = await fetch("http://localhost:3100/send/", options);
-  const data = await sendData.json();
-  console.log(data);
-  ulList.classList.add(data.answer);
+const clearValuesInFrom = () => {
+  taskDeadline.value = "";
+  taskPriority.checked = false;
+  taskText.value = "";
 };
-const getDataFromServer = async () => {
-  const options = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    cache: "no-cache",
-  };
-  const sendData = await fetch("http://localhost:3100/send/", options);
-  const data = await sendData.json();
-  console.log(data);
-  return data;
+
+const createNewTasksList = () => {
+  taskListUi.innerHTML = "";
+  for (const task of createTaskList.showListFromArray()) {
+    createTask(task);
+  }
+};
+
+const deactivateButton = (data) => {
+  deleteAllBtn.disabled = data;
+  deleteAllBtn.classList.toggle("noHover");
+  doneAllBtn.disabled = data;
+  doneAllBtn.classList.toggle("noHover");
 };

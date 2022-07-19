@@ -1,44 +1,48 @@
 const addBtn = document.querySelector(".addBtn");
+const deleteAllBtn = document.querySelector(".deleteAllBtn");
+const doneAllBtn = document.querySelector(".doneAllBtn");
 const taskListUi = document.querySelector(".tasksList");
 const taskText = document.querySelector("#taskToDoText");
 const taskPriority = document.querySelector("#taskPriority");
 const taskDeadline = document.querySelector("#taskDeadline");
-// const listPriorityChecked = document.querySelector(".prioChcked");
+const ulList = document.querySelector(".tasksList");
 
 let flag = true;
 
 const createTaskList = new TaskList();
-
-const clearValuesInFrom = () => {
-  taskDeadline.value = new Date().toISOString();
-  taskPriority.checked = false;
-  taskText.value = "";
-};
-
 (async () => {
-  console.log("Powinno się sciągnac cos");
   const dataFromServer = JSON.parse(await getDataFromServer());
-
-  if (dataFromServer === "" || dataFromServer.length === 0) {
-    console.log("Retrun null");
-    return null;
-  }
-  console.log("Przesżło przz if ");
+  if (dataFromServer === "" || dataFromServer.length === 0) return null;
   createTaskList.addArray(dataFromServer);
+  await deadlineRed();
   createNewTasksList();
 })();
 
+const doneAllTasks = async () => {
+  const arr = createTaskList.showListFromArray();
+  for (let i = 0; i < arr.length; i++) {
+    arr[i].taskDoneClass = !arr[i].taskDoneClass;
+  }
+  console.log(arr);
+  createNewTasksList();
+  await sendDataToServer(arr);
+};
+
+const deleteAllTasks = async () => {
+  const data = createTaskList.deleteAllTasksInApp();
+  deactivateButton(true);
+  createNewTasksList();
+  console.log(data);
+  await sendDataToServer(data);
+};
+
 const taskIsDone = async (e) => {
   const id = Number(e.target.dataset.id);
-  console.log("taskis done", id);
   const getObjetFromArray = createTaskList.getTaskFromArray(id);
-  console.log(getObjetFromArray);
-  getObjetFromArray.taskDoneClass = !getObjetFromArray.taskDoneClass
-    ? true
-    : false;
+  getObjetFromArray.taskDoneClass = !getObjetFromArray.taskDoneClass;
   createTaskList.sendTaskToArray(id, getObjetFromArray);
   createNewTasksList();
-  await sendDataToServer(createTaskList.showList());
+  await sendDataToServer(createTaskList.showListFromArray());
 };
 
 const editTaskFromList = (e) => {
@@ -47,28 +51,22 @@ const editTaskFromList = (e) => {
   const getObjetFromArray = createTaskList.getTaskFromArray(id);
   const { taskNameClass, taskPriorityClass, taskDeadlineClass } =
     getObjetFromArray;
-  console.log(taskDeadlineClass);
   taskDeadline.value = taskDeadlineClass;
   taskPriority.checked = taskPriorityClass;
   taskText.value = taskNameClass;
   addBtn.innerHTML = "Approve changes";
+  ulList.classList.add("noHover");
   createTaskList.removeTaskFromArray(id);
+  deactivateButton(false);
   flag = false;
 };
 
 const removeTaskFromList = async (e) => {
   const id = Number(e.target.dataset.id);
-  console.log({ id });
   createTaskList.removeTaskFromArray(id);
+  await deadlineRed();
   createNewTasksList();
-  await sendDataToServer(createTaskList.showList());
-};
-
-const createNewTasksList = () => {
-  taskListUi.innerHTML = "";
-  for (const task of createTaskList.showList()) {
-    createTask(task);
-  }
+  await sendDataToServer(createTaskList.showListFromArray());
 };
 
 const addTaskToList = async (e) => {
@@ -77,9 +75,11 @@ const addTaskToList = async (e) => {
   const taskCreationDateValue = new Date().toLocaleString();
   const taskPriorityValue = taskPriority.checked;
   const taskDeadlineValue = taskDeadline.value;
+  // if (taskTextValue.length < 5)
+  //   return alert("Added task is shorter than 5 characters");
   const newBodyFetch = new TaskToDo(
-    createTaskList.getNewCounter(),
-    flag ? taskTextValue : taskTextValue + "-Edited",
+    createTaskList.getNewCounterForArray(),
+    taskTextValue,
     taskPriorityValue,
     taskDeadlineValue,
     taskCreationDateValue,
@@ -87,18 +87,23 @@ const addTaskToList = async (e) => {
     false
   );
   createTaskList.addTaskToArray(newBodyFetch);
+  await deadlineRed();
   createNewTasksList();
   clearValuesInFrom();
-  await sendDataToServer(createTaskList.showList());
+  await sendDataToServer(createTaskList.showListFromArray());
 };
 
 addBtn.addEventListener("click", async (e) => {
   if (addBtn.innerHTML === "Add to list") {
     await addTaskToList(e);
+    deactivateButton(false);
   } else if (addBtn.innerHTML === "Approve changes") {
     addBtn.innerHTML = "Add to list";
-    console.log("działa wenwątrz apofove ");
+    ulList.classList.remove("noHover");
     flag = true;
+    deactivateButton(false);
     await addTaskToList(e);
   }
 });
+deleteAllBtn.addEventListener("click", deleteAllTasks);
+doneAllBtn.addEventListener("click", doneAllTasks);
