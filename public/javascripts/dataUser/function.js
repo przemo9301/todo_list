@@ -137,7 +137,7 @@ const getDataFromServer = async () => {
     },
     cache: "no-cache",
   };
-  const sendData = await fetch("http://localhost:3100/get/", options);
+  const sendData = await fetch("http://localhost:3100/send/", options);
   const data = await sendData.json();
   console.log(data);
   return data;

@@ -3,7 +3,7 @@ const taskListUi = document.querySelector(".tasksList");
 const taskText = document.querySelector("#taskToDoText");
 const taskPriority = document.querySelector("#taskPriority");
 const taskDeadline = document.querySelector("#taskDeadline");
-const listPriorityChecked = document.querySelector(".prioChcked");
+// const listPriorityChecked = document.querySelector(".prioChcked");
 
 let flag = true;
 

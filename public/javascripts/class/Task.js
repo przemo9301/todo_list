@@ -47,8 +47,6 @@ class TaskList {
     if (arrayLength === 0) return 1;
     let counter = this.tasks[arrayLength - 1].taskIdClass;
     counter++;
-    console.log(arrayLength);
-    console.log(counter);
     return counter;
   }
 }
