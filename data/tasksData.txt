@@ -1,1 +1,1 @@
-[{"taskIdClass":1,"taskNameClass":"asdsad","taskPriorityClass":true,"taskDeadlineClass":"","taskCreationDataClass":"20.07.2022, 17:08:37","taskDoneClass":true,"taskMeetDeadline":false},{"taskIdClass":2,"taskNameClass":"sadasdsad","taskPriorityClass":false,"taskDeadlineClass":"2022-07-20T17:10","taskCreationDataClass":"20.07.2022, 17:08:52","taskDoneClass":true,"taskMeetDeadline":true}]
+[{"taskIdClass":1,"taskNameClass":"sadsaddsa","taskPriorityClass":false,"taskDeadlineClass":"","taskCreationDataClass":"20.07.2022, 19:21:02","taskDoneClass":false,"taskMeetDeadline":false}]

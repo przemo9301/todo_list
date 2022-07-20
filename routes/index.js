@@ -1,6 +1,10 @@
 const express = require("express");
-const { readFile, writeFile } = require("fs").promises;
+const fs = require("fs");
+const { promisfy } = require("promisfy");
 const indexRouter = express.Router();
+
+const readFile = promisfy(fs.readFile);
+const writeFile = promisfy(fs.writeFile);
 
 const readFromFile = async () => await readFile("data/tasksData.txt", "utf8");
 
