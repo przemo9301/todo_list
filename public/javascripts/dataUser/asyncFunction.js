@@ -9,7 +9,7 @@ const sendDataToServer = async (sendInfoByBody) => {
       body: JSON.stringify(sendInfoByBody),
     };
     const sendData = await fetch(
-      "http://vps-3bd63737.vps.ovh.net/send/",
+      "http://vps-3bd63737.vps.ovh.net:3100/send/",
       options
     );
     const data = await sendData.json();
@@ -28,7 +28,7 @@ const getDataFromServer = async () => {
       cache: "no-cache",
     };
     const sendData = await fetch(
-      "http://vps-3bd63737.vps.ovh.net/send/",
+      "http://vps-3bd63737.vps.ovh.net:3100/send/",
       options
     );
     const data = await sendData.json();
