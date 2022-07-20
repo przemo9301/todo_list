@@ -102,7 +102,7 @@ const clearValuesInFrom = () => {
 };
 
 const createNewTasksList = () => {
-  taskListUi.innerHTML = "";
+  taskListUi.innerText = "";
   for (const task of createTaskList.showListFromArray()) {
     createTask(task);
   }

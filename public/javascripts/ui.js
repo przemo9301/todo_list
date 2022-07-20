@@ -57,7 +57,7 @@ const editTaskFromList = (e) => {
   taskDeadline.value = taskDeadlineClass;
   taskPriority.checked = taskPriorityClass;
   taskText.value = taskNameClass;
-  addBtn.innerHTML = "Approve changes";
+  addBtn.innerText = "Approve changes";
   ulList.classList.add("noHover");
   createTaskList.removeTaskFromArray(id);
   deactivateButton(false, "add");
@@ -100,11 +100,11 @@ const addTaskToList = async (e) => {
 };
 
 addBtn.addEventListener("click", async (e) => {
-  if (addBtn.innerHTML === "Add to list") {
+  if (addBtn.innerText === "Add to list") {
     await addTaskToList(e);
     deactivateButton(false, "remove");
-  } else if (addBtn.innerHTML === "Approve changes") {
-    addBtn.innerHTML = "Add to list";
+  } else if (addBtn.innerText === "Approve changes") {
+    addBtn.innerText = "Add to list";
     ulList.classList.remove("noHover");
     flagAddBtn = true;
     deactivateButton(false, "remove");
