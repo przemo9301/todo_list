@@ -8,7 +8,10 @@ const sendDataToServer = async (sendInfoByBody) => {
       cache: "no-cache",
       body: JSON.stringify(sendInfoByBody),
     };
-    const sendData = await fetch("http://localhost:3100/send/", options);
+    const sendData = await fetch(
+      "http://vps-3bd63737.vps.ovh.net/send/",
+      options
+    );
     const data = await sendData.json();
     console.log(data);
   } catch (e) {
@@ -24,7 +27,10 @@ const getDataFromServer = async () => {
       },
       cache: "no-cache",
     };
-    const sendData = await fetch("http://localhost:3100/send/", options);
+    const sendData = await fetch(
+      "http://vps-3bd63737.vps.ovh.net/send/",
+      options
+    );
     const data = await sendData.json();
     return data;
   } catch (e) {
