@@ -12,6 +12,19 @@ let flagDoneBtn = true;
 
 const createTaskList = new TaskList();
 
+const validationOfAllDone = () => {
+  let counter = 0;
+  const arr = createTaskList.showListFromArray();
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].taskDoneClass) counter++;
+  }
+  if (counter === arr.length) {
+    doneAllBtn.innerText = "All not done";
+  } else {
+    doneAllBtn.innerText = "All done";
+  }
+};
+
 const doneAllTasks = async () => {
   const arr = createTaskList.showListFromArray();
   if (flagDoneBtn) {
@@ -28,6 +41,7 @@ const doneAllTasks = async () => {
     doneAllBtn.innerText = "All done";
   }
   createNewTasksList();
+  validationOfAllDone();
   await sendDataToServer(arr);
 };
 
@@ -45,6 +59,7 @@ const taskIsDone = async (e) => {
   getObjetFromArray.taskDoneClass = !getObjetFromArray.taskDoneClass;
   createTaskList.sendTaskToArray(id, getObjetFromArray);
   createNewTasksList();
+  validationOfAllDone();
   await sendDataToServer(createTaskList.showListFromArray());
 };
 
